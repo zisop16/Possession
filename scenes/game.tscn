@@ -175,13 +175,14 @@ sources/0 = SubResource("TileSetAtlasSource_7lo54")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y5y4b"]
 shader = ExtResource("6_yxw56")
+shader_parameter/invisibilityColor = Color(1, 1, 1, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_oxx8q")
 
 [node name="Knight" parent="." instance=ExtResource("1_ys4fx")]
-SPEED = 100
-JUMP_SPEED = 300
+SPEED = 100.0
+JUMP_SPEED = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -194,8 +195,9 @@ tile_set = SubResource("TileSet_la4ad")
 
 [node name="Slime" parent="." instance=ExtResource("4_00thk")]
 position = Vector2(89, -12)
-SPEED = 75
-JUMP_SPEED = 150
+slime_vision = Color(0.515625, 1, 0.716187, 1)
+SPEED = 50.0
+JUMP_SPEED = 150.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

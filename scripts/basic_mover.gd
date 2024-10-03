@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if $"..".player_character == self:
+	if is_controlled():
 		handle_inputs()
 			
 	move_and_slide()
