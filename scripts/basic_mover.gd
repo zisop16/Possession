@@ -5,6 +5,8 @@ extends Controllable
 func move(direction: float):
 	velocity.x = direction * SPEED
 	change_sprite_direction(direction)
+
+var frame = 0
 	
 func handle_inputs():
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
@@ -25,5 +27,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if is_controlled():
 		handle_inputs()
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 			
 	move_and_slide()

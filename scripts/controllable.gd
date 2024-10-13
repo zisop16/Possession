@@ -12,4 +12,4 @@ func change_sprite_direction(direction: float) -> void:
 		$AnimatedSprite2D.flip_h = false
 
 func is_controlled() -> bool:
-	return $"..".player_character == self
+	return Global.player_character == self

@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://dckio2hsyveth"]
+
+[ext_resource type="Script" path="res://scripts/question_block.gd" id="1_s70xf"]
+[ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="1_w0ddw"]
+
+[sub_resource type="Animation" id="Animation_tyl3g"]
+resource_name = "Release"
+step = 0.00833333
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.233333, -4, -11.5, -0.25, 6.5, 0.258333, 7.5, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.0]
+}
+
+[sub_resource type="Animation" id="Animation_jhd13"]
+resource_name = "Shake"
+loop_mode = 2
+step = 0.005
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.28, 0.47, 0.655, 0.825, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-0.6, 2.65), Vector2(1.9, -3.77), Vector2(2.155, 2.73), Vector2(-0.125, -2.415), Vector2(-0.92, 2.52), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ylb1"]
+_data = {
+"Release": SubResource("Animation_tyl3g"),
+"Shake": SubResource("Animation_jhd13")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l20l8"]
+size = Vector2(16, 16)
+
+[node name="QuestionBlock" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ylb1")
+}
+autoplay = "Shake"
+speed_scale = 4.0
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+script = ExtResource("1_s70xf")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("1_w0ddw")
+hframes = 16
+vframes = 16
+frame = 39
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+visible = false
+shape = SubResource("RectangleShape2D_l20l8")
