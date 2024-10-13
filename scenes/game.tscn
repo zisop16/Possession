@@ -14,7 +14,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y5y4b"]
 shader = ExtResource("6_yxw56")
-shader_parameter/invisibility_color = null
+shader_parameter/invisibility_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Shader" id="Shader_d0qag"]
 code = "
@@ -215,7 +215,6 @@ sources/0 = SubResource("TileSetAtlasSource_7lo54")
 script = ExtResource("1_5vr86")
 
 [node name="Tint" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("1_spdgl")
 
 [node name="ColorRect" type="ColorRect" parent="Tint"]
@@ -227,7 +226,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Focus" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("3_0mwhb")
 
 [node name="ColorRect" type="ColorRect" parent="Focus"]

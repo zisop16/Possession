@@ -15,9 +15,10 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="TextBox" type="CanvasLayer" node_paths=PackedStringArray("textLabel")]
+[node name="TextBox" type="CanvasLayer" node_paths=PackedStringArray("textLabel", "endLabel")]
 script = ExtResource("1_3l1el")
 textLabel = NodePath("MarginContainer/MarginContainer/MarginContainer/HBoxContainer/Text")
+endLabel = NodePath("MarginContainer/MarginContainer/MarginContainer/HBoxContainer/End")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 12
