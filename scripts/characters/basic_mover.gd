@@ -6,35 +6,46 @@ func move(direction: float):
 	velocity.x = direction * SPEED
 	change_sprite_direction(direction)
 
+@export var interaction_range = 0
 func can_interact(other: Interactable) -> bool:
 	var distance = (other.global_position - global_position).length()
 	return distance < interaction_range
 
-var interacting = false
-@export var interaction_range = 0
-func handle_inputs():
-	if interacting:
-		return
+func handle_UI_inputs():
+	if Input.is_action_just_pressed("Skip"):
+		if Global.textbox.open():
+			Global.textbox.skip()
+
+func determine_interaction_target() -> Interactable:
+	for interactable: Interactable in Global.interactables:
+		if can_interact(interactable):
+			return interactable
+	return null
+			
+func handle_character_inputs() -> bool:
 
 	if Input.is_action_just_pressed("Interact"):
-		for interactable in Global.interactables:
-			if can_interact(interactable):
-				interacting = true
-				interactable.interact()
-				break
+		if Global.interaction_target != null:
+			Global.interaction_target.interact()
+			Global.interacting = true
 
-	if interacting:
-		return
+	if Global.interacting:
+		return false
 
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 			velocity.y = -JUMP_SPEED
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 	var direction = Input.get_axis("Move Left", "Move Right")
 	if direction:
 		move(direction)
+
+	return direction != 0
+
+func _process(_delta: float) -> void:
+	if Global.interacting:
+		handle_UI_inputs()
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		Global.set_interaction_target(determine_interaction_target())
 		
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -42,9 +53,11 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if is_controlled():
-		handle_inputs()
-	else:
+	var moving = false
+	if is_controlled() and not Global.interacting:
+		moving = handle_character_inputs()
+
+	if not moving:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 			
 	move_and_slide()

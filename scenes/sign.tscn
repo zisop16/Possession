@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ukhkt"]
 shader = ExtResource("2_c8r1h")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/outline_width = 0.004
+shader_parameter/outline_width = 0.0
 shader_parameter/spritesheet_dimensions = Vector2(16, 16)
 shader_parameter/spritesheet_coords = Vector2(8, 3)
 

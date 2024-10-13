@@ -8,8 +8,14 @@ var has_been_read = false
 @export var read_rate: float
 
 func interact() -> void:
-	read()
-
-func read() -> void:
-	outline.set_shader_parameter("outline_width", 0)
+	indicate_interaction(false)
+	Global.set_interaction_target(null)
 	Global.textbox.display(text, read_rate)
+
+const OUTLINE_WIDTH: float = .004
+func indicate_interaction(flag: bool) -> void:
+	if flag:
+		outline.set_shader_parameter("outline_width", OUTLINE_WIDTH)
+	else:
+		outline.set_shader_parameter("outline_width", 0)
+	

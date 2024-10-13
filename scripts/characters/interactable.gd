@@ -9,3 +9,6 @@ func _ready() -> void:
 
 func interact() -> void:
 	pass
+
+func indicate_interaction(_flag: bool) -> void:
+	pass
