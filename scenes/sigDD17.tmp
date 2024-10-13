@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsexrfe2qghpr"]
+
+[ext_resource type="Script" path="res://scripts/characters/sign.gd" id="1_r7i6v"]
+[ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="2_6s00r"]
+[ext_resource type="Shader" path="res://assets/shaders/spriteOutline.gdshader" id="2_c8r1h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ukhkt"]
+shader = ExtResource("2_c8r1h")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.004
+shader_parameter/spritesheet_dimensions = Vector2(16, 16)
+shader_parameter/spritesheet_coords = Vector2(8, 3)
+
+[node name="Sign" type="Node2D"]
+script = ExtResource("1_r7i6v")
+text = "Default Sign Text"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ukhkt")
+texture = ExtResource("2_6s00r")
+hframes = 16
+vframes = 16
+frame = 56

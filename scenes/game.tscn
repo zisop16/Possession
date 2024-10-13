@@ -1,17 +1,20 @@
-[gd_scene load_steps=14 format=4 uid="uid://dm0n4gccnvat3"]
+[gd_scene load_steps=17 format=4 uid="uid://dm0n4gccnvat3"]
 
-[ext_resource type="Script" path="res://scripts/tint.gd" id="1_spdgl"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_5vr86"]
+[ext_resource type="Script" path="res://scripts/shaders/tint.gd" id="1_spdgl"]
 [ext_resource type="PackedScene" uid="uid://ogyuuhi86prw" path="res://scenes/knight.tscn" id="1_ys4fx"]
 [ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="2_tlbgj"]
-[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="2_ttuvb"]
-[ext_resource type="Script" path="res://scripts/focus.gd" id="3_0mwhb"]
+[ext_resource type="Script" path="res://scripts/userInterface/camera_2d.gd" id="2_ttuvb"]
+[ext_resource type="Script" path="res://scripts/shaders/focus.gd" id="3_0mwhb"]
 [ext_resource type="PackedScene" uid="uid://dckio2hsyveth" path="res://scenes/question_block.tscn" id="3_q1ind"]
 [ext_resource type="PackedScene" uid="uid://bkgtg5cn61exs" path="res://scenes/slime.tscn" id="4_00thk"]
 [ext_resource type="Shader" path="res://assets/shaders/invisibility.gdshader" id="6_yxw56"]
+[ext_resource type="PackedScene" uid="uid://bsexrfe2qghpr" path="res://scenes/sign.tscn" id="9_flfaf"]
+[ext_resource type="PackedScene" uid="uid://ct5s6qp3hxhfo" path="res://scenes/textbox.tscn" id="11_7hvfg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y5y4b"]
 shader = ExtResource("6_yxw56")
-shader_parameter/invisibilityColor = Color(1, 1, 1, 1)
+shader_parameter/invisibility_color = null
 
 [sub_resource type="Shader" id="Shader_d0qag"]
 code = "
@@ -209,8 +212,10 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7lo54")
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_5vr86")
 
 [node name="Tint" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("1_spdgl")
 
 [node name="ColorRect" type="ColorRect" parent="Tint"]
@@ -222,6 +227,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Focus" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_0mwhb")
 
 [node name="ColorRect" type="ColorRect" parent="Focus"]
@@ -261,3 +267,11 @@ script = ExtResource("2_ttuvb")
 
 [node name="Knight" parent="." instance=ExtResource("1_ys4fx")]
 position = Vector2(-110, 0)
+
+[node name="Sign" parent="." instance=ExtResource("9_flfaf")]
+position = Vector2(-62, -8)
+text = "Destiny has kept us apart for so long, and yet today we come together. What does it mean?"
+read_rate = 20.0
+
+[node name="TextBox" parent="." instance=ExtResource("11_7hvfg")]
+visible = false

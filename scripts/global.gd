@@ -1,6 +1,11 @@
 extends Node2D
 
-var player_character = null
-var question_block = null
-var focus_shader = null
-var tint_shader = null
+
+var interactables: Array[Interactable] = []
+
+var textbox: TextBox = null
+var player_character: Controllable = null
+var question_block: QuestionBlock = null
+var focus_shader: Material = null
+var tint_shader: Material = null
+var logging: bool = false

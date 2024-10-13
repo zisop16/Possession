@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dckio2hsyveth"]
 
-[ext_resource type="Script" path="res://scripts/question_block.gd" id="1_s70xf"]
+[ext_resource type="Script" path="res://scripts/characters/question_block.gd" id="1_s70xf"]
 [ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="1_w0ddw"]
 
 [sub_resource type="Animation" id="Animation_tyl3g"]

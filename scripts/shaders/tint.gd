@@ -1,4 +1,4 @@
 extends CanvasLayer
 
 func _ready() -> void:
-	Global.focus_shader = $ColorRect.material;
+	Global.tint_shader = $ColorRect.material

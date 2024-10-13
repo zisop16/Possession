@@ -6,9 +6,26 @@ func move(direction: float):
 	velocity.x = direction * SPEED
 	change_sprite_direction(direction)
 
-var frame = 0
-	
+func can_interact(other: Interactable) -> bool:
+	var distance = (other.global_position - global_position).length()
+	return distance < interaction_range
+
+var interacting = false
+@export var interaction_range = 0
 func handle_inputs():
+	if interacting:
+		return
+
+	if Input.is_action_just_pressed("Interact"):
+		for interactable in Global.interactables:
+			if can_interact(interactable):
+				interacting = true
+				interactable.interact()
+				break
+
+	if interacting:
+		return
+
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 			velocity.y = -JUMP_SPEED
 	# Get the input direction and handle the movement/deceleration.
