@@ -36,8 +36,8 @@ func _physics_process(_delta: float) -> void:
 	if not animating:
 		var currTime = Time.get_unix_time_from_system()
 		var diff = currTime - endTime
-		var oscillation_height = 20
-		var oscillation_speed = 10
+		var oscillation_height = 16
+		var oscillation_speed = 8
 		# Make the 'v' at the end of the textbox oscillate up and down from its initial position
 		endLabel.global_position.y = endLabelY - .5 * oscillation_height * (1 - cos(diff * oscillation_speed))
 

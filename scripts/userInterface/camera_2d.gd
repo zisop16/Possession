@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 	var change = lerpFactor * diff * delta
 	global_position += change
 
+func update_focus() -> void:
 	var focusRelativePosition = focus_obj.global_position - global_position
 	var cameraDimensions = get_viewport_rect().size
 	cameraDimensions.x /= zoom.x

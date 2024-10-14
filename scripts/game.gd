@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func _ready() -> void:
 	Global.logging = false
 	Global.textbox = $TextBox
