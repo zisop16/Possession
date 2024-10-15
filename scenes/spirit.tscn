@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://l152c6namvpe"]
+
+[ext_resource type="Script" path="res://scripts/spirit.gd" id="1_xbovj"]
+[ext_resource type="Script" path="res://scripts/trail.gd" id="2_nr78n"]
+
+[sub_resource type="Curve" id="Curve_7qqqe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.141026, 0.494505), 5.53846, 5.53846, 0, 0, Vector2(0.354701, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="Spirit" type="Node2D"]
+script = ExtResource("1_xbovj")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+width = 4.0
+width_curve = SubResource("Curve_7qqqe")
+script = ExtResource("2_nr78n")
+TRAIL_LENGTH = 0.4
+TRAIL_TIMESTEP = null
+MIN_TRAIL_DIFF = null

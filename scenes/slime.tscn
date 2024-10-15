@@ -51,6 +51,7 @@ SPEED = 75.0
 JUMP_SPEED = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_vemea")
 animation = &"idle"
 autoplay = "idle"
@@ -58,7 +59,6 @@ frame = 3
 frame_progress = 0.688479
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_28xll")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

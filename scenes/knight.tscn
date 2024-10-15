@@ -237,12 +237,11 @@ JUMP_SPEED = 300.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
-position = Vector2(0, -12)
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_y6vkt")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 7
-position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_jp8hh")
