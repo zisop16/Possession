@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bskeul1ltsy8b"]
+
+[ext_resource type="Texture2D" uid="uid://kr2ielan41ga" path="res://assets/sprites/fruit.png" id="1_p7lo0"]
+[ext_resource type="Script" path="res://scripts/fruit.gd" id="1_uksbt"]
+[ext_resource type="Shader" path="res://assets/shaders/tiles.gdshader" id="1_yk8n4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8yr3"]
+shader = ExtResource("1_yk8n4")
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/saturation = 1.0
+shader_parameter/gamma = 1.0
+shader_parameter/exposure = 1.0
+shader_parameter/filter = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nb20b"]
+radius = 4.0
+height = 10.21
+
+[node name="Fruit" type="StaticBody2D"]
+script = ExtResource("1_uksbt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_k8yr3")
+texture = ExtResource("1_p7lo0")
+hframes = 4
+vframes = 4
+frame = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2.895)
+shape = SubResource("CapsuleShape2D_nb20b")

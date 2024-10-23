@@ -239,7 +239,7 @@ JUMP_SPEED = 300.0
 z_index = 5
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_y6vkt")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

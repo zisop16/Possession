@@ -7,9 +7,10 @@ func move(direction: float):
 	change_sprite_direction(direction)
 
 @export var interaction_range = 0
-func can_interact(other: Interactable) -> bool:
+func interaction_info(other: Interactable) -> Array:
 	var distance = (other.global_position - global_position).length()
-	return distance < interaction_range
+	var within_range = distance < interaction_range
+	return [within_range, distance]
 
 func handle_UI_inputs():
 	if Input.is_action_just_pressed("Skip"):
@@ -17,10 +18,21 @@ func handle_UI_inputs():
 			Global.textbox.skip()
 
 func determine_interaction_target() -> Interactable:
+	var min_dist
+	var target = null
 	for interactable: Interactable in Global.interactables:
-		if can_interact(interactable):
-			return interactable
-	return null
+		var info = interaction_info(interactable)
+		var can_interact = info[0]
+		var curr_dist = info[1]
+		if can_interact:
+			if target == null:
+				min_dist = curr_dist
+				target = interactable
+				continue
+			if curr_dist < min_dist:
+				min_dist = range
+				target = interactable
+	return target
 			
 func handle_character_inputs() -> bool:
 
@@ -47,6 +59,8 @@ func _process(_delta: float) -> void:
 	else:
 		Global.set_interaction_target(determine_interaction_target())
 		
+@onready var sprite = $AnimatedSprite2D
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -56,6 +70,10 @@ func _physics_process(delta: float) -> void:
 	var moving = false
 	if is_controlled() and not Global.interacting:
 		moving = handle_character_inputs()
+		if moving:
+			sprite.play("run")
+		else:
+			sprite.play("idle")
 
 	if not moving:
 		velocity.x = move_toward(velocity.x, 0, SPEED)

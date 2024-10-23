@@ -4,6 +4,7 @@ extends Node2D
 func _ready() -> void:
 	Global.logging = false
 	Global.textbox = $TextBox
+	Global.game = self
 
 var average = 0
 var alpha = 0.001
