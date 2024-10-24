@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dckio2hsyveth"]
+[gd_scene load_steps=9 format=3 uid="uid://dckio2hsyveth"]
 
 [ext_resource type="Script" path="res://scripts/characters/question_block.gd" id="1_s70xf"]
 [ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="1_w0ddw"]
+[ext_resource type="PackedScene" uid="uid://l152c6namvpe" path="res://scenes/objects/spirit.tscn" id="2_gqd2t"]
 
 [sub_resource type="Animation" id="Animation_tyl3g"]
 resource_name = "Release"
@@ -89,7 +90,6 @@ autoplay = "Shake"
 speed_scale = 4.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
 position = Vector2(0, -10)
 process_material = SubResource("ParticleProcessMaterial_i2n6j")
 lifetime = 0.3
@@ -97,6 +97,7 @@ speed_scale = 0.47
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 script = ExtResource("1_s70xf")
+spirit = ExtResource("2_gqd2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 texture = ExtResource("1_w0ddw")

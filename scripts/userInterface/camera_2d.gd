@@ -3,16 +3,28 @@ extends Camera2D
 
 # Called when the node enters the scene tree for the first time.
 @onready var focus_obj = Global.question_block;
+var default_zoom = Vector2(4, 4)
 func _ready() -> void:
-	pass
+	Global.camera = self
 
+func get_center() -> Vector2:
+	var center
+	if custom_center != null:
+		center = custom_center.global_position
+	else:
+		center = Global.player_character.global_position + Vector2(0, -20)
+	return center
 
+func teleport_to_target() -> void:
+	var center = get_center()
+	global_position = center
+
+var custom_center: Node2D = null
 
 func _physics_process(delta: float) -> void:
-	var player = Global.player_character
-	var target_position = player.global_position + Vector2(0, -20)
+	var center = get_center()
 	
-	var diff = target_position - global_position
+	var diff = center - global_position
 	
 	
 	const lerpFactor = 4

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://dv8j5n6mjjmes"]
+[gd_scene load_steps=9 format=4 uid="uid://dv8j5n6mjjmes"]
 
+[ext_resource type="PackedScene" uid="uid://b0uymni7621yo" path="res://scenes/level_component.tscn" id="1_yppvf"]
 [ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="5_cjwip"]
-[ext_resource type="PackedScene" uid="uid://dckio2hsyveth" path="res://scenes/question_block.tscn" id="6_olwae"]
-[ext_resource type="PackedScene" uid="uid://bkgtg5cn61exs" path="res://scenes/slime.tscn" id="7_ig4nn"]
-[ext_resource type="PackedScene" uid="uid://ogyuuhi86prw" path="res://scenes/knight.tscn" id="9_504sg"]
-[ext_resource type="PackedScene" uid="uid://bsexrfe2qghpr" path="res://scenes/sign.tscn" id="10_3681g"]
+[ext_resource type="PackedScene" uid="uid://dckio2hsyveth" path="res://scenes/objects/question_block.tscn" id="6_olwae"]
+[ext_resource type="PackedScene" uid="uid://bkgtg5cn61exs" path="res://scenes/mobs/slime.tscn" id="7_ig4nn"]
+[ext_resource type="PackedScene" uid="uid://ogyuuhi86prw" path="res://scenes/mobs/knight.tscn" id="9_504sg"]
+[ext_resource type="PackedScene" uid="uid://bsexrfe2qghpr" path="res://scenes/objects/sign.tscn" id="10_3681g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_suww7"]
 texture = ExtResource("5_cjwip")
@@ -173,6 +174,8 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_suww7")
 
 [node name="Level1" type="Node2D"]
+
+[node name="LevelComponent" parent="." instance=ExtResource("1_yppvf")]
 
 [node name="Tiles" type="Node2D" parent="."]
 metadata/_edit_use_anchors_ = true

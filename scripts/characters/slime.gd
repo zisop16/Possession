@@ -20,12 +20,12 @@ func possess() -> void:
 			
 
 func handle_transition() -> void:
-	var current_color = Global.tint_shader.get_shader_parameter("invisibility_color")
+	var current_color = Global.post_process_shader.get_shader_parameter("filter")
 	const change_speed = 1.5;
 	var new_color = lerp(current_color, slime_vision, change_speed * get_process_delta_time())
 	var diff = color_difference(new_color, slime_vision)
 	if diff < .1:
 		color_changing = false
 		new_color = slime_vision
-	Global.tint_shader.set_shader_parameter("invisibility_color", new_color)
+	Global.post_process_shader.set_shader_parameter("filter", new_color)
 	

@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://bskeul1ltsy8b"]
+
+[ext_resource type="Script" path="res://scripts/fruit.gd" id="1_63itn"]
+[ext_resource type="Texture2D" uid="uid://b0xhskcyfb1r3" path="res://assets/sprites/Line1.png" id="2_v4kjp"]
+[ext_resource type="Shader" path="res://assets/shaders/tiles.gdshader" id="3_s0bsb"]
+[ext_resource type="Texture2D" uid="uid://kr2ielan41ga" path="res://assets/sprites/fruit.png" id="4_4ny4i"]
+
+[sub_resource type="Curve" id="Curve_gq5tk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.252577, 0.0879121), 3.46429, 3.46429, 0, 0, Vector2(0.757732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.032967), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_uthyu"]
+curve = SubResource("Curve_gq5tk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gl6or"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 20.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -30.0
+radial_accel_max = -30.0
+color = Color(0.997559, 0.921875, 1, 1)
+alpha_curve = SubResource("CurveTexture_uthyu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8yr3"]
+shader = ExtResource("3_s0bsb")
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/saturation = 1.0
+shader_parameter/gamma = 1.0
+shader_parameter/exposure = 1.0
+shader_parameter/filter = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nb20b"]
+radius = 4.0
+height = 10.21
+
+[node name="Fruit" type="StaticBody2D"]
+script = ExtResource("1_63itn")
+interaction_range = 70.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_gl6or")
+texture = ExtResource("2_v4kjp")
+explosiveness = 0.2
+fixed_fps = 60
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_k8yr3")
+position = Vector2(0, -3)
+texture = ExtResource("4_4ny4i")
+hframes = 4
+vframes = 4
+frame = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2.895)
+shape = SubResource("CapsuleShape2D_nb20b")

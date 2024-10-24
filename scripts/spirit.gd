@@ -23,7 +23,6 @@ var reached_target = false
 var spawn_time
 func _physics_process(delta: float) -> void:
 	var diff = attractor.global_position - global_position
-	var old_pos = global_position
 	if reached_target:
 		var lerp_speed = 5
 		# We want the vector from the attractor to us, which is -diff

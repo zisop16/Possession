@@ -3,7 +3,7 @@ class_name QuestionBlock
 extends AnimatableBody2D
 
 @onready var anim_player = $"../AnimationPlayer"
-var spirit = preload("res://scenes/spirit.tscn")
+@export var spirit: PackedScene
 
 func _ready() -> void:
 	Global.question_block = self
@@ -59,7 +59,6 @@ var release_time: float
 var spirits_released = 0
 func release() -> void:
 	if released:
-		reset()
 		return
 	anim_player.play("Release")
 	released = true

@@ -1,10 +1,10 @@
 extends Node2D
 
-
 func _ready() -> void:
 	Global.logging = false
 	Global.textbox = $TextBox
 	Global.game = self
+	Global.post_process_shader = $PostProcess/ColorRect.material
 
 var average = 0
 var alpha = 0.001

@@ -6,10 +6,9 @@ func move(direction: float):
 	velocity.x = direction * SPEED
 	change_sprite_direction(direction)
 
-@export var interaction_range = 0
 func interaction_info(other: Interactable) -> Array:
 	var distance = (other.global_position - global_position).length()
-	var within_range = distance < interaction_range
+	var within_range = distance < other.interaction_range
 	return [within_range, distance]
 
 func handle_UI_inputs():
