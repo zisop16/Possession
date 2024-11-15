@@ -10,7 +10,7 @@ void fragment() {
 	vec2 right = vec2(UV.x + outline_width, UV.y);
 	vec2 up = vec2(UV.x, UV.y + outline_width);
 	vec2 down = vec2(UV.x, UV.y - outline_width);
-	
+
 	float lowerX = spritesheet_coords.x / spritesheet_dimensions.x;
 	float upperX = (spritesheet_coords.x + 1.) / spritesheet_dimensions.x;
 	float lowerY = spritesheet_coords.y / spritesheet_dimensions.y;
@@ -21,17 +21,17 @@ void fragment() {
 	right = clamp(right, lower, upper);
 	up = clamp(up, lower, upper);
 	down = clamp(down, lower, upper);
-	
+
 	vec4 leftColor = texture(TEXTURE, left);
 	vec4 rightColor = texture(TEXTURE, right);
 	vec4 upColor = texture(TEXTURE, up);
 	vec4 downColor = texture(TEXTURE, down);
-	
+
 	bool onBorder = COLOR.a == 0. && (leftColor.a != 0. || rightColor.a != 0. || upColor.a != 0. || downColor.a != 0.);
-	
-	
+
+
 	if (onBorder) {
 		COLOR = vec4(outline_color, 1);
 	}
-	
+
 }

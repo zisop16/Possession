@@ -16,6 +16,8 @@ func handle_UI_inputs():
 		if Global.textbox.open():
 			Global.textbox.skip()
 
+var animating: bool = false
+
 func determine_interaction_target() -> Interactable:
 	var min_dist
 	var target = null
@@ -37,44 +39,56 @@ func handle_character_inputs() -> bool:
 
 	if Input.is_action_just_pressed("Interact"):
 		if Global.interaction_target != null:
+			Global.interacting_object = Global.interaction_target
 			Global.interaction_target.interact()
-			Global.interacting = true
 
-	if Global.interacting:
+	if Global.interacting_object:
 		return false
 
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
-			velocity.y = -JUMP_SPEED
+			velocity += up_direction * JUMP_SPEED
 	
 	var direction = Input.get_axis("Move Left", "Move Right")
-	if direction:
+	if direction != 0:
 		move(direction)
 
 	return direction != 0
-
-func _process(_delta: float) -> void:
-	if Global.interacting:
-		handle_UI_inputs()
-	else:
-		Global.set_interaction_target(determine_interaction_target())
 		
 @onready var sprite = $AnimatedSprite2D
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+func before_slide():
+	
+	var delta = get_physics_process_delta_time()
+	if not animating:
+		if not is_on_floor():
+			# Add the gravity.
+			velocity += get_gravity().length() * -up_direction * delta
+			
 
-	# Handle jump.
-	var moving = false
-	if is_controlled() and not Global.interacting:
-		moving = handle_character_inputs()
-		if moving:
-			sprite.play("run")
-		else:
-			sprite.play("idle")
+		# Handle jump.
+		var moving = false
+		if is_controlled() and not Global.interacting_object:
+			Global.set_interaction_target(determine_interaction_target())
 
-	if not moving:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+			moving = handle_character_inputs()
+			if moving:
+				sprite.play("run")
+			else:
+				sprite.play("idle")
+
+		if not moving:
+			var horizontal_direction = up_direction.rotated(-PI/2)
+			var horizontal_speed = velocity.dot(horizontal_direction)
+			var new_horizontal_speed = move_toward(horizontal_speed, 0, SPEED)
+			var diff = new_horizontal_speed - horizontal_speed
+			velocity += diff * horizontal_direction
+			# velocity.x = move_toward(velocity.x, 0, SPEED)
+
+func _physics_process(_delta: float) -> void:
+	before_slide()
 			
 	move_and_slide()
+
+func _process(_delta: float) -> void:
+	if is_controlled() and Global.interacting_object:
+		handle_UI_inputs()

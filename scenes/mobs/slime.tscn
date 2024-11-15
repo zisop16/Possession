@@ -40,9 +40,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28xll"]
-size = Vector2(14, 12)
+size = Vector2(12, 10)
 
 [node name="Slime" type="CharacterBody2D" groups=["Slime"]]
+z_index = 5
 collision_layer = 5
 collision_mask = 7
 script = ExtResource("1_qowai")
@@ -61,5 +62,36 @@ frame_progress = 0.688479
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_28xll")
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[node name="Left2" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+target_position = Vector2(-10, 0)
+
+[node name="Left1" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+target_position = Vector2(-10, 0)
+
+[node name="Right2" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+target_position = Vector2(10, 0)
+
+[node name="Right1" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(0, -5)
+target_position = Vector2(10, 0)
+
+[node name="Down2" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(6, 0)
+target_position = Vector2(0, 10)
+
+[node name="Down1" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(-6, 0)
+target_position = Vector2(0, 10)
+
+[node name="SlimeBottom" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 6)

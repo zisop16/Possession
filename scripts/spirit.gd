@@ -2,12 +2,16 @@ class_name Spirit
 
 extends Node2D
 
+signal spirit_freed
+signal spirit_hit_knight(velocity: Vector2)
+
 @onready var trail = $Line2D
 
 @export var attractor: Node2D
 @export var gravity_strength: float = .1
 @export var drag_factor: float = .1
 @export var gravity_exponent: float = 2
+@export var pull_radius = 20
 
 func _ready() -> void:
 	spawn_time = Time.get_ticks_msec() / 1000.
@@ -39,6 +43,7 @@ func _physics_process(delta: float) -> void:
 
 		global_position = attractor.global_position + new_diff
 		if len(trail.queue) < 2:
+			spirit_freed.emit()
 			queue_free()
 		return
 	if not gravity_enabled():
@@ -59,6 +64,7 @@ func _physics_process(delta: float) -> void:
 	velocity += drag * delta
 	global_position += velocity * delta
 
-	var inside = (global_position - attractor.position).length() < 15
+	var inside = (global_position - attractor.position).length() < pull_radius
 	if inside:
 		reached_target = true
+		spirit_hit_knight.emit(velocity)

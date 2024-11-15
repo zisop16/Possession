@@ -9,7 +9,7 @@ uniform vec2 focus = vec2(0, 0);
 void fragment() {
 	vec2 dimensions = 1./SCREEN_PIXEL_SIZE;
 	float ratio = dimensions.x / dimensions.y;
-	
+
 	vec4 inputColor = textureLod(screen_texture, SCREEN_UV, 0.0);
 	vec2 diff = SCREEN_UV - focus;
 	diff.x *= ratio;

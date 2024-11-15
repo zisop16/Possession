@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://bu43j28es0lu0"]
 
 [ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="1_lubei"]
-[ext_resource type="PackedScene" uid="uid://b0uymni7621yo" path="res://scenes/level_component.tscn" id="1_wr43u"]
+[ext_resource type="PackedScene" uid="uid://b0uymni7621yo" path="res://scenes/levels/level_component.tscn" id="1_wr43u"]
 [ext_resource type="PackedScene" uid="uid://ogyuuhi86prw" path="res://scenes/mobs/knight.tscn" id="2_sjq5f"]
 [ext_resource type="Shader" path="res://assets/shaders/tiles.gdshader" id="2_wji22"]
 [ext_resource type="Texture2D" uid="uid://kr2ielan41ga" path="res://assets/sprites/fruit.png" id="3_58lrj"]

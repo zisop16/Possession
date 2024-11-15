@@ -21,6 +21,9 @@ func teleport_to_target() -> void:
 
 var custom_center: Node2D = null
 
+func _process(_delta: float) -> void:
+	pass
+
 func _physics_process(delta: float) -> void:
 	var center = get_center()
 	

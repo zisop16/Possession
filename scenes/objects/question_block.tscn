@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dckio2hsyveth"]
+[gd_scene load_steps=10 format=3 uid="uid://dckio2hsyveth"]
 
 [ext_resource type="Script" path="res://scripts/characters/question_block.gd" id="1_s70xf"]
 [ext_resource type="Texture2D" uid="uid://c8lhu5ex60228" path="res://assets/sprites/world_tileset.png" id="1_w0ddw"]
@@ -77,6 +77,11 @@ gravity = Vector3(0, 0, 0)
 radial_accel_min = -40.0
 radial_accel_max = -40.0
 
+[sub_resource type="Curve" id="Curve_1pd18"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.734693, 0, 0, Vector2(0.482906, 0.120879), 0.857143, 0.857143, 0, 0, Vector2(0.799145, 0.901099), 1.6875, 1.6875, 0, 0, Vector2(0.991453, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l20l8"]
 size = Vector2(16, 16)
 
@@ -90,6 +95,7 @@ autoplay = "Shake"
 speed_scale = 4.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(0, -10)
 process_material = SubResource("ParticleProcessMaterial_i2n6j")
 lifetime = 0.3
@@ -98,6 +104,8 @@ speed_scale = 0.47
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 script = ExtResource("1_s70xf")
 spirit = ExtResource("2_gqd2t")
+spiritCurve = SubResource("Curve_1pd18")
+release_endpoint = 3.2
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 texture = ExtResource("1_w0ddw")

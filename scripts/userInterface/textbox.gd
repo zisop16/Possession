@@ -26,7 +26,7 @@ func display(text: String, read_rate):
 		animating = false
 		endLabel.text = 'v'
 		endTime = Time.get_unix_time_from_system()
-		endLabelY = endLabel.global_position.y
+		endLabelY = endLabel.position.y
 
 	textTween.tween_callback(callback)
 
@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 		var oscillation_height = 16
 		var oscillation_speed = 8
 		# Make the 'v' at the end of the textbox oscillate up and down from its initial position
-		endLabel.global_position.y = endLabelY - .5 * oscillation_height * (1 - cos(diff * oscillation_speed))
+		endLabel.position.y = endLabelY - .5 * oscillation_height * (1 - cos(diff * oscillation_speed))
 
 func skip():
 	if textTween.is_running():
@@ -51,7 +51,7 @@ func skip():
 	
 func disappear() -> void:
 	visible = false
-	Global.interacting = false
+	Global.interacting_object = null
 
 func open() -> bool:
 	return visible

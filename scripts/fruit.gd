@@ -17,20 +17,17 @@ func interact() -> void:
 func zoom_in():
 	var tween = create_tween()
 	var duration = 1.3
-	tween.tween_method(Global.set_brightness, 0., .8, duration)
+	tween.tween_method(Global.set_brightness, 0., .6, duration)
 	tween.set_ease(tween.EASE_IN)
-	tween.set_trans(tween.TRANS_CUBIC)
+	tween.set_trans(tween.TRANS_EXPO)
 	tween = tween.parallel()
 	tween.tween_property(Global.camera, "zoom", Vector2(100, 100), duration)
-	tween.set_ease(tween.EASE_IN)
-	tween.set_trans(tween.TRANS_QUINT)
 	tween.tween_callback(finish_change)
+	
 	
 
 func _process(_delta: float) -> void:
 	return
-	if Time.get_ticks_msec() % 1000 == 0:
-		print(Global.camera.zoom)
 
 func finish_change() -> void:
 	Global.load_level(transport_level)
