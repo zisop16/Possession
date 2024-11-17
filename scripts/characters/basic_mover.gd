@@ -53,6 +53,72 @@ func handle_character_inputs() -> bool:
 		move(direction)
 
 	return direction != 0
+
+enum AI_STATES {
+	IDLE,
+	CHASING
+}
+
+# Current state of AI
+var state: AI_STATES = AI_STATES.IDLE
+var remaining_movement: float = 0
+var movement_direction: float = 0
+var next_movement_time: float = 0
+
+func generate_directional_movement() -> void:
+	var stdev = 1
+	var normal = randfn(0, stdev)
+	var stdev_limits = 3
+	normal = clamp(normal, -stdev_limits*stdev, stdev_limits*stdev)
+	if (normal < 0):
+		remaining_movement = -normal
+		movement_direction = -1
+	else:
+		remaining_movement = normal
+		movement_direction = 1
+
+# mew is the average
+# mewing is important
+func exponential_random(mew : float = 1.0) -> float:
+	return -log(1.0 - randf()) * mew
+
+func generate_movement_time() -> void:
+	var average = 3
+	var result = exponential_random(average)
+	next_movement_time = result
+
+func afraid_of_moving() -> bool:
+	return false
+
+func handle_ai_inputs() -> bool:
+	if afraid_of_moving():
+		return false
+
+	match state:
+		AI_STATES.IDLE:
+			if remaining_movement != 0:
+				if movement_direction > 0:
+					move(1)
+				else:
+					move(-1)
+				remaining_movement -= get_physics_process_delta_time()
+				if remaining_movement < 0:
+					remaining_movement = 0
+				print(remaining_movement)
+				return true
+
+			elif next_movement_time == 0:
+				generate_directional_movement()
+				generate_movement_time()
+			else:
+				next_movement_time -= get_physics_process_delta_time()
+				if next_movement_time < 0:
+					next_movement_time = 0
+
+		AI_STATES.CHASING:
+			pass
+
+	return false
 		
 @onready var sprite = $AnimatedSprite2D
 
@@ -75,6 +141,8 @@ func before_slide():
 				sprite.play("run")
 			else:
 				sprite.play("idle")
+		if not is_controlled():
+			moving = handle_ai_inputs()
 
 		if not moving:
 			var horizontal_direction = up_direction.rotated(-PI/2)

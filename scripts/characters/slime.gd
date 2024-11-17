@@ -114,7 +114,7 @@ func _process(_delta: float) -> void:
 	super._process(_delta)
 	# if is_controlled() and color_changing:
 	# 	handle_transition()
-	possess()
+	# possess()
 
 func possess() -> void:
 	Global.player_character = self
