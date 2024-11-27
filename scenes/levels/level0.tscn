@@ -348,7 +348,7 @@ tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD+/wEAAAAAAAEAAAD+/wIAAAABAAE
 tile_set = SubResource("TileSet_syd0e")
 
 [node name="Knight" parent="." instance=ExtResource("2_sjq5f")]
-position = Vector2(355, 38)
+position = Vector2(352, 42)
 
 [node name="Fruit" parent="." instance=ExtResource("5_5fjyc")]
 position = Vector2(448, 45)
@@ -356,15 +356,15 @@ transport_level = ExtResource("7_bpfmh")
 
 [node name="NO FRUIT" parent="." instance=ExtResource("8_ghqwv")]
 position = Vector2(390, 40)
-text = "DO NOT TOUCH THE FRUIT
-DO NOT TOUCH THE FRUIT
-DONOTTOUCHTHEFRUIT"
+text = "noooo dont touch the fruit
+*meow*"
 read_rate = 25.0
 
 [node name="Turn back" parent="." instance=ExtResource("8_ghqwv")]
 position = Vector2(154, 24)
-text = "Turn around."
+text = "pls turn around"
 
 [node name="Jump off" parent="." instance=ExtResource("8_ghqwv")]
 position = Vector2(-119, -8)
-text = "This world is empty. Jump down. There is nothing for us here."
+text = "This world is empty.
+ONE ESCAPE"

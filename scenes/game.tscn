@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/postProcess.gdshader" id="2_k3usp"]
 [ext_resource type="Script" path="res://scripts/userInterface/camera_2d.gd" id="2_ttuvb"]
 [ext_resource type="Script" path="res://scripts/shaders/focus.gd" id="3_0mwhb"]
-[ext_resource type="PackedScene" uid="uid://dv8j5n6mjjmes" path="res://scenes/levels/level1.tscn" id="6_trjp8"]
+[ext_resource type="PackedScene" uid="uid://bu43j28es0lu0" path="res://scenes/levels/level0.tscn" id="6_yo536"]
 [ext_resource type="Shader" path="res://assets/shaders/invisibility.gdshader" id="6_yxw56"]
 [ext_resource type="PackedScene" uid="uid://ct5s6qp3hxhfo" path="res://scenes/textbox.tscn" id="11_7hvfg"]
 
@@ -88,7 +88,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level1" parent="." instance=ExtResource("6_trjp8")]
+[node name="Level0" parent="." instance=ExtResource("6_yo536")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

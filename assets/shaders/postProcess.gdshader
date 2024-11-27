@@ -16,13 +16,13 @@ void fragment() {
 	color = contrast * (color - .5) + .5 + brightness;
 	color = clamp(color, 0, 1);
 	color *= filter;
-	
+
 	vec3 grayscaleVector = vec3(.299, .587, .114);
 	float grayscale = dot(color, grayscaleVector);
 	color = saturation * color + (1.-saturation) * grayscale;
 	color = clamp(color, 0, 1);
-	
+
 	color = pow(color, vec3(1./gamma));
-	
+
 	COLOR = vec4(color, inputColor.a);
 }
