@@ -15,7 +15,7 @@ void fragment() {
 	diff.x *= ratio;
 	float distSq = dot(diff, diff);
 	float blackFactor = 65.;
-	float lowerBound = .01;
+	float lowerBound = .1;
 	float lightness = 2. * (1. - (1. - lowerBound) / (1. + pow(2, -blackFactor * distSq)));
 	inputColor.xyz *= lightness;
 

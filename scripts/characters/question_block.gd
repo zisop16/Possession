@@ -64,7 +64,7 @@ func release_spirit():
 	inst.attractor = Global.player_character
 	inst.position = self.global_position
 	inst.position += angle * 10
-	Global.game.add_child(inst)
+	Global.current_level.add_child(inst)
 	spirits_released += 1
 	var decrement_spirit_count = func(): remaining_spirits -= 1
 	inst.spirit_freed.connect(decrement_spirit_count)

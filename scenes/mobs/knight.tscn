@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://ogyuuhi86prw"]
+[gd_scene load_steps=35 format=3 uid="uid://ogyuuhi86prw"]
 
 [ext_resource type="Script" path="res://scripts/characters/knight.gd" id="1_8obe6"]
+[ext_resource type="PackedScene" uid="uid://l152c6namvpe" path="res://scenes/objects/spirit.tscn" id="2_4qmtd"]
 [ext_resource type="Texture2D" uid="uid://drtmaaoukk263" path="res://assets/sprites/knight.png" id="2_ewlfx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23veq"]
@@ -233,6 +234,7 @@ collision_mask = 7
 script = ExtResource("1_8obe6")
 SPEED = 100.0
 JUMP_SPEED = 300.0
+spirit = ExtResource("2_4qmtd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
@@ -242,6 +244,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 7
 position = Vector2(0, -0.0277801)
 shape = SubResource("RectangleShape2D_jp8hh")

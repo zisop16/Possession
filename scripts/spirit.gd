@@ -3,7 +3,6 @@ class_name Spirit
 extends Node2D
 
 signal spirit_freed
-signal spirit_hit_knight(velocity: Vector2)
 
 @onready var trail = $Line2D
 
@@ -67,4 +66,3 @@ func _physics_process(delta: float) -> void:
 	var inside = (global_position - attractor.position).length() < pull_radius
 	if inside:
 		reached_target = true
-		spirit_hit_knight.emit(velocity)

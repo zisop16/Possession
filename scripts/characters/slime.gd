@@ -13,6 +13,23 @@ func right_direction() -> Vector2:
 func _physics_process(delta: float) -> void:
 	rotated = false
 	super._physics_process(delta)
+	if is_controlled() and rotated:
+		var new_target = rotation
+		var diff = new_target - Global.camera.rotation
+		# randomize between 180 and -180 degree turns
+		if abs(diff) == PI:
+			var rand_bool = randi_range(0, 1)
+			if rand_bool:
+				if diff < 0:
+					new_target += 2 * PI
+				else:
+					new_target -= 2 * PI
+		if abs(diff) > PI:
+			if diff < 0:
+				new_target += 2 * PI
+			else:
+				new_target -= 2 * PI
+		Global.camera.rotation_target = new_target
 
 func left_colliding():
 	return left_1.is_colliding() || left_2.is_colliding()
@@ -59,12 +76,12 @@ func close_to_floor() -> bool:
 
 var mostRecentMovement: float
 var rotated: bool
-@onready var left_1: RayCast2D = $Left1
-@onready var left_2: RayCast2D = $Left2
-@onready var right_1: RayCast2D = $Right1
-@onready var right_2: RayCast2D = $Right2
-@onready var down_1: RayCast2D = $Down1
-@onready var down_2: RayCast2D = $Down2
+@onready var left_1: RayCast2D = $Raycasts/Left1
+@onready var left_2: RayCast2D = $Raycasts/Left2
+@onready var right_1: RayCast2D = $Raycasts/Right1
+@onready var right_2: RayCast2D = $Raycasts/Right2
+@onready var down_1: RayCast2D = $Raycasts/Down1
+@onready var down_2: RayCast2D = $Raycasts/Down2
 func update_raycasts() -> void:
 	left_1.force_raycast_update()
 	left_2.force_raycast_update()
@@ -73,7 +90,7 @@ func update_raycasts() -> void:
 	down_1.force_raycast_update()
 	down_2.force_raycast_update()
 
-@onready var slime_bottom: Node2D = $SlimeBottom
+@onready var slime_bottom: Node2D = $Raycasts/SlimeBottom
 
 func move(direction: float):
 	if is_on_wall() and mostRecentMovement != 0:
@@ -113,8 +130,8 @@ func _process(_delta: float) -> void:
 	# var click = Input.get_action_strength("Possess")
 	super._process(_delta)
 	# if is_controlled() and color_changing:
-	# 	handle_transition()
-	# possess()
+	#	handle_transition()
+	possess()
 
 func possess() -> void:
 	Global.player_character = self

@@ -2,6 +2,7 @@ extends Node2D
 
 
 var interactables: Array[Interactable] = []
+var controllables: Array[Controllable] = []
 
 var textbox: TextBox = null
 var interacting_object = null

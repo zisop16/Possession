@@ -4,8 +4,10 @@ extends Camera2D
 # Called when the node enters the scene tree for the first time.
 @onready var focus_obj = Global.question_block;
 var default_zoom = Vector2(4, 4)
+var rotation_target: float
 func _ready() -> void:
 	Global.camera = self
+	rotation_target = rotation
 
 func get_center() -> Vector2:
 	var center
@@ -30,9 +32,14 @@ func _physics_process(delta: float) -> void:
 	var diff = center - global_position
 	
 	
-	const lerpFactor = 4
+	var lerpFactor = 4
 	var change = lerpFactor * diff * delta
 	global_position += change
+
+	lerpFactor = 10
+	diff = rotation_target - rotation
+	change = lerpFactor * diff * delta
+	rotation += change
 
 func update_focus() -> void:
 	var focusRelativePosition = focus_obj.global_position - global_position

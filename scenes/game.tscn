@@ -5,6 +5,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/postProcess.gdshader" id="2_k3usp"]
 [ext_resource type="Script" path="res://scripts/userInterface/camera_2d.gd" id="2_ttuvb"]
 [ext_resource type="Script" path="res://scripts/shaders/focus.gd" id="3_0mwhb"]
+[ext_resource type="Shader" path="res://assets/shaders/focus.gdshader" id="6_xtbor"]
 [ext_resource type="PackedScene" uid="uid://bu43j28es0lu0" path="res://scenes/levels/level0.tscn" id="6_yo536"]
 [ext_resource type="Shader" path="res://assets/shaders/invisibility.gdshader" id="6_yxw56"]
 [ext_resource type="PackedScene" uid="uid://ct5s6qp3hxhfo" path="res://scenes/textbox.tscn" id="11_7hvfg"]
@@ -22,33 +23,8 @@ shader_parameter/filter = Color(1, 1, 1, 1)
 shader = ExtResource("6_yxw56")
 shader_parameter/invisibility_color = Color(1, 1, 1, 1)
 
-[sub_resource type="Shader" id="Shader_d0qag"]
-code = "
-shader_type canvas_item;
-uniform sampler2D screen_texture : hint_screen_texture, filter_nearest;
-// UV coordinates of focus target
-uniform vec2 focus = vec2(0, 0);
-
-
-
-void fragment() {
-	vec2 dimensions = 1./SCREEN_PIXEL_SIZE;
-	float ratio = dimensions.x / dimensions.y;
-	
-	vec4 inputColor = textureLod(screen_texture, SCREEN_UV, 0.0);
-	vec2 diff = SCREEN_UV - focus;
-	diff.x *= ratio;
-	float distSq = dot(diff, diff);
-	float blackFactor = 65.;
-	float lowerBound = .01;
-	float lightness = 2. * (1. - (1. - lowerBound) / (1. + pow(2, -blackFactor * distSq)));
-	inputColor.xyz *= lightness;
-
-	COLOR = inputColor;
-}"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nln1u"]
-shader = SubResource("Shader_d0qag")
+shader = ExtResource("6_xtbor")
 shader_parameter/focus = Vector2(0.5, 0.5)
 
 [node name="Game" type="Node2D"]
@@ -91,6 +67,7 @@ grow_vertical = 2
 [node name="Level0" parent="." instance=ExtResource("6_yo536")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
 zoom = Vector2(4, 4)
 script = ExtResource("2_ttuvb")
 

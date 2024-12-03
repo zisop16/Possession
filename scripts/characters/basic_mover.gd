@@ -33,6 +33,7 @@ func determine_interaction_target() -> Interactable:
 			if curr_dist < min_dist:
 				min_dist = range
 				target = interactable
+	# print(target)
 	return target
 			
 func handle_character_inputs() -> bool:
@@ -104,7 +105,6 @@ func handle_ai_inputs() -> bool:
 				remaining_movement -= get_physics_process_delta_time()
 				if remaining_movement < 0:
 					remaining_movement = 0
-				print(remaining_movement)
 				return true
 
 			elif next_movement_time == 0:
@@ -120,7 +120,6 @@ func handle_ai_inputs() -> bool:
 
 	return false
 		
-@onready var sprite = $AnimatedSprite2D
 
 func before_slide():
 	
@@ -135,14 +134,16 @@ func before_slide():
 		var moving = false
 		if is_controlled() and not Global.interacting_object:
 			Global.set_interaction_target(determine_interaction_target())
-
 			moving = handle_character_inputs()
-			if moving:
-				sprite.play("run")
-			else:
-				sprite.play("idle")
+
+
 		if not is_controlled():
 			moving = handle_ai_inputs()
+
+		if moving:
+			sprite.play("run")
+		else:
+			sprite.play("idle")
 
 		if not moving:
 			var horizontal_direction = up_direction.rotated(-PI/2)
@@ -153,6 +154,7 @@ func before_slide():
 			# velocity.x = move_toward(velocity.x, 0, SPEED)
 
 func _physics_process(_delta: float) -> void:
+	super._physics_process(_delta)
 	before_slide()
 			
 	move_and_slide()

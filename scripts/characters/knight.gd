@@ -59,10 +59,6 @@ func handle_spirits_animation():
 
 		# var drag_coeff = 5
 		# velocity.x -= velocity.x * get_physics_process_delta_time() * drag_coeff
-		
-func spirit_impact(_impact_velocity: Vector2) -> void:
-	# velocity.x += impact_velocity.x / 10.
-	pass
 
 func on_spirits_absorbed():
 	Global.reset_camera()

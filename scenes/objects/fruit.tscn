@@ -41,7 +41,7 @@ height = 10.21
 
 [node name="Fruit" type="StaticBody2D"]
 script = ExtResource("1_63itn")
-interaction_range = 70.0
+interaction_range = 40.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 25
