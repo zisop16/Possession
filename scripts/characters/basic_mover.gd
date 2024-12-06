@@ -67,6 +67,7 @@ var movement_direction: float = 0
 var next_movement_time: float = 0
 
 func generate_directional_movement() -> void:
+	return
 	var stdev = 1
 	var normal = randfn(0, stdev)
 	var stdev_limits = 3

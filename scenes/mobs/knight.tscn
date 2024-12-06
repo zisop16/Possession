@@ -234,6 +234,7 @@ collision_mask = 7
 script = ExtResource("1_8obe6")
 SPEED = 100.0
 JUMP_SPEED = 300.0
+possession_range = 25.0
 spirit = ExtResource("2_4qmtd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

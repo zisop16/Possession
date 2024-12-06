@@ -68,7 +68,6 @@ func release_spirit():
 	spirits_released += 1
 	var decrement_spirit_count = func(): remaining_spirits -= 1
 	inst.spirit_freed.connect(decrement_spirit_count)
-	inst.spirit_hit_knight.connect(Global.player_character.spirit_impact)
 
 
 var released = false

@@ -3,6 +3,7 @@ class_name Knight
 extends BasicMover
 
 func _ready() -> void:
+	super._ready()
 	Global.player_character = self
 
 func _physics_process(delta: float) -> void:

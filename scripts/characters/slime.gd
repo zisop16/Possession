@@ -56,7 +56,7 @@ func before_slide():
 	super.before_slide()
 	
 
-	if not close_to_floor():
+	if not (close_to_floor() || recently_rotated()):
 		if (mostRecentMovement == 1) and (left_colliding()):
 			# Moving right, fell and have a wall on left
 			up_direction = right_direction()
@@ -68,6 +68,7 @@ func before_slide():
 			rotated = true
 		if rotated:
 			update_raycasts()
+			last_rotation_timestamp = Time.get_ticks_msec() / 1000.
 	
 func close_to_floor() -> bool:
 	var epsilon = 1
@@ -92,8 +93,13 @@ func update_raycasts() -> void:
 
 @onready var slime_bottom: Node2D = $Raycasts/SlimeBottom
 
+func recently_rotated() -> bool:
+	var cooldown: float = .3
+	return Time.get_ticks_msec() / 1000. - last_rotation_timestamp < cooldown
+
+var last_rotation_timestamp: float = 0
 func move(direction: float):
-	if is_on_wall() and mostRecentMovement != 0:
+	if not recently_rotated() and is_on_wall() and mostRecentMovement != 0:
 		if mostRecentMovement == 1:
 			# Moving right, ran into a wall
 			up_direction = left_direction()
@@ -105,6 +111,7 @@ func move(direction: float):
 		rotated = true
 		if rotated:
 			update_raycasts()
+			last_rotation_timestamp = Time.get_ticks_msec() / 1000.
 	
 	if rotated:
 		var dist = floor_distance()
@@ -131,10 +138,10 @@ func _process(_delta: float) -> void:
 	super._process(_delta)
 	# if is_controlled() and color_changing:
 	#	handle_transition()
-	possess()
+	# possess()
 
 func possess() -> void:
-	Global.player_character = self
+	super.possess()
 	color_changing = true
 			
 

@@ -51,6 +51,7 @@ func set_brightness(value: float):
 func load_level(level: PackedScene):
 	current_level.queue_free()
 	interactables.clear()
+	controllables.clear()
 	var tween = create_tween()
 
 	tween.tween_method(set_brightness, curr_brightness, 0., camera_reset_duration)

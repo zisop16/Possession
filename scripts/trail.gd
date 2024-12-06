@@ -5,6 +5,16 @@ var queue: Array[float]
 @export var TRAIL_TIMESTEP: float = .001
 @export var MIN_TRAIL_DIFF: float = 1
 
+func rand_color() -> Color:
+	var hue = randf_range(.2, .8)
+	var sat = randf_range(.30, .60)
+	var lightness = randf_range(.9, 1)
+	return Color.from_hsv(hue, sat, lightness)
+
+func _ready() -> void:
+	gradient.set_color(0, rand_color())
+	gradient.set_color(1, rand_color())
+
 func _process(_delta: float) -> void:
 	var pos = linePos()
 	

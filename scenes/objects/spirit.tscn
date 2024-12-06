@@ -8,14 +8,14 @@ _data = [Vector2(0, 0.417582), 0.0, 0.0, 0, 0, Vector2(0.195556, 0.78022), 2.360
 point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_owkee"]
-colors = PackedColorArray(0.938763, 0.941406, 0.603088, 1, 0.997681, 0.703125, 1, 1)
+resource_local_to_scene = true
+colors = PackedColorArray(0.94, 0.94, 0.658, 1, 0.997681, 0.703125, 1, 1)
 
 [node name="Spirit" type="Node2D"]
 script = ExtResource("1_xbovj")
 gravity_strength = 5.0
 drag_factor = 0.5
 gravity_exponent = 1.3
-pull_radius = null
 
 [node name="Line2D" type="Line2D" parent="."]
 top_level = true
@@ -24,5 +24,3 @@ width_curve = SubResource("Curve_7qqqe")
 gradient = SubResource("Gradient_owkee")
 script = ExtResource("2_nr78n")
 TRAIL_LENGTH = 0.4
-TRAIL_TIMESTEP = null
-MIN_TRAIL_DIFF = null

@@ -90,6 +90,7 @@ script = ExtResource("1_qowai")
 slime_vision = Color(0.513726, 1, 0.717647, 1)
 SPEED = 85.0
 JUMP_SPEED = 280.0
+possession_range = 25.0
 spirit = ExtResource("2_8wixw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -99,6 +100,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_28xll")
 

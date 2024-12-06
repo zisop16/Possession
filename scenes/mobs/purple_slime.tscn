@@ -90,6 +90,7 @@ script = ExtResource("1_d3g7v")
 slime_vision = Color(0.728058, 0.480469, 1, 1)
 SPEED = 120.0
 JUMP_SPEED = 400.0
+possession_range = 30.0
 spirit = ExtResource("2_ql5m8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

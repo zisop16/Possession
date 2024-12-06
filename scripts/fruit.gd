@@ -1,7 +1,13 @@
 extends Interactable
 
 @onready var color_correction = $Sprite2D.material
+@onready var sprite = $Sprite2D
 @export var transport_level: PackedScene
+@export var type: Vector2i = Vector2i(1, 2)
+
+func _ready() -> void:
+	super._ready()
+	sprite.frame_coords = type
 
 func interact() -> void:
 	var position_offset = Vector2(0, -20)
