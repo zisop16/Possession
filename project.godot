@@ -23,6 +23,10 @@ Global="*res://scripts/global.gd"
 
 window/vsync/vsync_mode=0
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [global_group]
 
 Slime=""

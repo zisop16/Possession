@@ -1,13 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://cw4liweibxdyr"]
+[gd_scene load_steps=16 format=3 uid="uid://cw4liweibxdyr"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_5vr86"]
 [ext_resource type="Script" path="res://scripts/shaders/tint.gd" id="1_spdgl"]
 [ext_resource type="Shader" path="res://assets/shaders/postProcess.gdshader" id="2_k3usp"]
+[ext_resource type="PackedScene" uid="uid://dv8j5n6mjjmes" path="res://scenes/levels/level1.tscn" id="2_k5u6d"]
 [ext_resource type="Script" path="res://scripts/userInterface/camera_2d.gd" id="2_ttuvb"]
 [ext_resource type="Script" path="res://scripts/shaders/focus.gd" id="3_0mwhb"]
+[ext_resource type="PackedScene" uid="uid://bu43j28es0lu0" path="res://scenes/levels/level0.tscn" id="4_dsxx8"]
 [ext_resource type="Shader" path="res://assets/shaders/focus.gdshader" id="6_xtbor"]
-[ext_resource type="PackedScene" uid="uid://bu43j28es0lu0" path="res://scenes/levels/level0.tscn" id="6_yo536"]
 [ext_resource type="Shader" path="res://assets/shaders/invisibility.gdshader" id="6_yxw56"]
+[ext_resource type="PackedScene" uid="uid://dx1o8c00jyo3e" path="res://scenes/levels/level-1.tscn" id="7_gkhfu"]
+[ext_resource type="PackedScene" uid="uid://cj5lpok8scdjg" path="res://scenes/levels/level2.tscn" id="9_3g56m"]
 [ext_resource type="PackedScene" uid="uid://ct5s6qp3hxhfo" path="res://scenes/textbox.tscn" id="11_7hvfg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u1tfb"]
@@ -29,6 +32,10 @@ shader_parameter/focus = Vector2(0.5, 0.5)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_5vr86")
+lev1 = ExtResource("2_k5u6d")
+lev2 = ExtResource("9_3g56m")
+lev0 = ExtResource("4_dsxx8")
+levmenu = ExtResource("7_gkhfu")
 
 [node name="PostProcess" type="CanvasLayer" parent="."]
 
@@ -64,12 +71,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level0" parent="." instance=ExtResource("6_yo536")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
 zoom = Vector2(4, 4)
 script = ExtResource("2_ttuvb")
+
+[node name="level-1" parent="." instance=ExtResource("7_gkhfu")]
 
 [node name="TextBox" parent="." instance=ExtResource("11_7hvfg")]
 visible = false

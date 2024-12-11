@@ -67,7 +67,6 @@ var movement_direction: float = 0
 var next_movement_time: float = 0
 
 func generate_directional_movement() -> void:
-	return
 	var stdev = 1
 	var normal = randfn(0, stdev)
 	var stdev_limits = 3
@@ -130,21 +129,21 @@ func before_slide():
 			# Add the gravity.
 			velocity += get_gravity().length() * -up_direction * delta
 			
-
-		# Handle jump.
 		var moving = false
-		if is_controlled() and not Global.interacting_object:
-			Global.set_interaction_target(determine_interaction_target())
-			moving = handle_character_inputs()
+
+		if not spirit_active:
+			if is_controlled() and not Global.interacting_object:
+				Global.set_interaction_target(determine_interaction_target())
+				moving = handle_character_inputs()
 
 
-		if not is_controlled():
-			moving = handle_ai_inputs()
+			if not is_controlled():
+				moving = handle_ai_inputs()
 
-		if moving:
-			sprite.play("run")
-		else:
-			sprite.play("idle")
+			if moving:
+				sprite.play("run")
+			else:
+				sprite.play("idle")
 
 		if not moving:
 			var horizontal_direction = up_direction.rotated(-PI/2)

@@ -1,8 +1,19 @@
-[gd_scene load_steps=35 format=3 uid="uid://ogyuuhi86prw"]
+[gd_scene load_steps=38 format=3 uid="uid://ogyuuhi86prw"]
 
 [ext_resource type="Script" path="res://scripts/characters/knight.gd" id="1_8obe6"]
 [ext_resource type="PackedScene" uid="uid://l152c6namvpe" path="res://scenes/objects/spirit.tscn" id="2_4qmtd"]
 [ext_resource type="Texture2D" uid="uid://drtmaaoukk263" path="res://assets/sprites/knight.png" id="2_ewlfx"]
+[ext_resource type="Shader" path="res://assets/shaders/tiles.gdshader" id="3_qk5dd"]
+[ext_resource type="Material" uid="uid://jpt3o31o5nd" path="res://assets/Styles/knight.tres" id="5_ckvga"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlmsk"]
+shader = ExtResource("3_qk5dd")
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/saturation = 1.0
+shader_parameter/gamma = 1.0
+shader_parameter/exposure = 1.0
+shader_parameter/filter = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23veq"]
 atlas = ExtResource("2_ewlfx")
@@ -234,11 +245,11 @@ collision_mask = 7
 script = ExtResource("1_8obe6")
 SPEED = 100.0
 JUMP_SPEED = 300.0
-possession_range = 25.0
 spirit = ExtResource("2_4qmtd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
+material = SubResource("ShaderMaterial_jlmsk")
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_y6vkt")
 animation = &"idle"
@@ -249,3 +260,12 @@ visible = false
 z_index = 7
 position = Vector2(0, -0.0277801)
 shape = SubResource("RectangleShape2D_jp8hh")
+
+[node name="Explode" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 200
+process_material = ExtResource("5_ckvga")
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.8
+fixed_fps = 120

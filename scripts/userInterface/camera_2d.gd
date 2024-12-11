@@ -13,8 +13,10 @@ func get_center() -> Vector2:
 	var center
 	if custom_center != null:
 		center = custom_center.global_position
-	else:
+	elif Global.player_character != null:
 		center = Global.player_character.global_position + Vector2(0, -20)
+	else:
+		return Vector2.ZERO
 	return center
 
 func teleport_to_target() -> void:
@@ -38,6 +40,7 @@ func _physics_process(delta: float) -> void:
 
 	lerpFactor = 10
 	diff = rotation_target - rotation
+	diff = fmod(diff, 2 * PI)
 	change = lerpFactor * diff * delta
 	rotation += change
 

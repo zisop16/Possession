@@ -1,9 +1,16 @@
 extends Node2D
 
+@export var lev1: PackedScene
+@export var lev2: PackedScene
+@export var lev0: PackedScene
+@export var levmenu: PackedScene
+
 func _ready() -> void:
 	Global.textbox = $TextBox
 	Global.game = self
 	Global.post_process_shader = $PostProcess/ColorRect.material
+	Global.camera.custom_center = $"level-1/Center"
+	Global.camera.global_position = Global.camera.custom_center.global_position
 
 
 var average = 0

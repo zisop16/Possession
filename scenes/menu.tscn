@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://cla1vlxtadwue"]
+
+[ext_resource type="Script" path="res://scripts/userInterface/menu.gd" id="1_4vnl3"]
+[ext_resource type="PackedScene" uid="uid://bu43j28es0lu0" path="res://scenes/levels/level0.tscn" id="2_cykpk"]
+[ext_resource type="FontFile" uid="uid://dod4ttr81fete" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_hpxxy"]
+[ext_resource type="FontFile" uid="uid://cmoxj2s4o8bqn" path="res://assets/fonts/PixelOperator8.ttf" id="3_wfci1"]
+[ext_resource type="StyleBox" uid="uid://exfj8h8dfmn8" path="res://assets/Styles/menu.tres" id="4_jovyv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrp2v"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.183105, 0.488281, 0.245094, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 3
+shadow_offset = Vector2(-2, 2)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4vnl3")
+level0 = ExtResource("2_cykpk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 76.0
+offset_right = 60.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.218887, 0.589844, 0.494207, 1)
+theme_override_fonts/font = ExtResource("2_hpxxy")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("4_jovyv")
+theme_override_styles/normal = ExtResource("4_jovyv")
+text = "Play"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.218887, 0.589844, 0.494207, 1)
+theme_override_fonts/font = ExtResource("2_hpxxy")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = ExtResource("4_jovyv")
+theme_override_styles/normal = ExtResource("4_jovyv")
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.0
+offset_top = -204.0
+offset_right = 278.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.999054, 0.878906, 1, 1)
+theme_override_fonts/font = ExtResource("3_wfci1")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_vrp2v")
+text = "Slime Simulator 2024"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 				new_target += 2 * PI
 			else:
 				new_target -= 2 * PI
+		new_target = fmod(new_target, 2 * PI)
 		Global.camera.rotation_target = new_target
 
 func left_colliding():
@@ -69,6 +70,22 @@ func before_slide():
 		if rotated:
 			update_raycasts()
 			last_rotation_timestamp = Time.get_ticks_msec() / 1000.
+
+	if not close_to_floor():
+		if not falling_last_frame:
+			if up_direction != Vector2.UP:
+				falling_last_frame = true
+				fall_start = Time.get_ticks_msec() / 1000.
+		else:
+			var fall_duration = Time.get_ticks_msec() / 1000. - fall_start
+			if fall_duration > .6:
+				rotate(-rotation)
+				up_direction = Vector2.UP
+				rotated = true
+				update_raycasts()
+				last_rotation_timestamp = Time.get_ticks_msec() / 1000.
+	else:
+		falling_last_frame = false
 	
 func close_to_floor() -> bool:
 	var epsilon = 1
@@ -98,6 +115,9 @@ func recently_rotated() -> bool:
 	return Time.get_ticks_msec() / 1000. - last_rotation_timestamp < cooldown
 
 var last_rotation_timestamp: float = 0
+var falling_last_frame: bool = false
+var fall_start: float
+
 func move(direction: float):
 	if not recently_rotated() and is_on_wall() and mostRecentMovement != 0:
 		if mostRecentMovement == 1:
@@ -134,16 +154,14 @@ func color_difference(col1: Color, col2: Color) -> float:
 
 var color_changing = false
 func _process(_delta: float) -> void:
-	# var click = Input.get_action_strength("Possess")
 	super._process(_delta)
-	# if is_controlled() and color_changing:
-	#	handle_transition()
-	# possess()
+	if is_controlled() and color_changing:
+		handle_transition()
 
 func possess() -> void:
 	super.possess()
+	Global.camera.rotation_target = fmod(rotation, 2 * PI)
 	color_changing = true
-			
 
 func handle_transition() -> void:
 	var current_color = Global.post_process_shader.get_shader_parameter("filter")
@@ -154,4 +172,3 @@ func handle_transition() -> void:
 		color_changing = false
 		new_color = slime_vision
 	Global.post_process_shader.set_shader_parameter("filter", new_color)
-	

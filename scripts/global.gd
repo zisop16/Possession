@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var interactables: Array[Interactable] = []
 var controllables: Array[Controllable] = []
 
@@ -35,6 +34,17 @@ func set_interaction_target(interactable: Interactable):
 			interaction_target.indicate_interaction(false)
 		interaction_target = interactable
 
+func game_over():
+	current_level.queue_free()
+	interactables.clear()
+	controllables.clear()
+	current_level = game.levmenu.instantiate()
+	interacting_object = null
+	# camera.custom_center = current_level
+	game.add_child(current_level)
+	camera.teleport_to_target()
+
+
 var camera_reset_duration: float = .3
 func reset_camera():
 	var tween = create_tween()
@@ -48,7 +58,7 @@ func set_brightness(value: float):
 	curr_brightness = value
 	post_process_shader.set_shader_parameter("brightness", value)
 	
-func load_level(level: PackedScene):
+func load_level(level: int):
 	current_level.queue_free()
 	interactables.clear()
 	controllables.clear()
@@ -58,9 +68,19 @@ func load_level(level: PackedScene):
 	tween.set_trans(tween.TRANS_CUBIC)
 	tween.set_ease(tween.EASE_IN)
 	reset_camera()
-	
-	interacting_object = false
-	var next_level = level.instantiate()
+
+	var scene: PackedScene
+	match level:
+		-1:
+			scene = game.levmenu
+		0:
+			scene = game.lev0
+		1:
+			scene = game.lev1
+		2:
+			scene = game.lev2
+	interacting_object = null
+	var next_level = scene.instantiate()
 	game.add_child(next_level)
 	camera.custom_center = player_character
 	camera.teleport_to_target()

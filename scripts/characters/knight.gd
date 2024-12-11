@@ -41,7 +41,9 @@ func handle_questionblock_collision():
 				animation_start = Global.time
 				absorbed_spirits = true
 				break
-		
+
+func possess():
+	Global.camera.rotation = rotation
 
 func handle_spirits_animation():
 	if question_event:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dv8j5n6mjjmes"]
+[gd_scene load_steps=12 format=4 uid="uid://dv8j5n6mjjmes"]
 
 [ext_resource type="Script" path="res://scripts/levels/level_1.gd" id="1_glng7"]
 [ext_resource type="PackedScene" uid="uid://b0uymni7621yo" path="res://scenes/levels/level_component.tscn" id="1_yppvf"]
@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bkgtg5cn61exs" path="res://scenes/mobs/green_slime.tscn" id="7_ig4nn"]
 [ext_resource type="PackedScene" uid="uid://bskeul1ltsy8b" path="res://scenes/objects/fruit.tscn" id="8_4cqgm"]
 [ext_resource type="PackedScene" uid="uid://ogyuuhi86prw" path="res://scenes/mobs/knight.tscn" id="9_504sg"]
+[ext_resource type="PackedScene" uid="uid://bnnxu8hauo1jd" path="res://scenes/mobs/purple_slime.tscn" id="9_e28s8"]
 [ext_resource type="PackedScene" uid="uid://bsexrfe2qghpr" path="res://scenes/objects/sign.tscn" id="10_3681g"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l8f34"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2ehc"]
 texture = ExtResource("5_cjwip")
 9:3/0 = 0
 9:4/0 = 0
@@ -173,7 +174,7 @@ texture = ExtResource("5_cjwip")
 
 [sub_resource type="TileSet" id="TileSet_la4ad"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_l8f34")
+sources/0 = SubResource("TileSetAtlasSource_q2ehc")
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_glng7")
@@ -197,6 +198,22 @@ tile_set = SubResource("TileSet_la4ad")
 
 [node name="QuestionBlock" parent="." instance=ExtResource("6_olwae")]
 position = Vector2(1, -44)
+
+[node name="Slime4" parent="." instance=ExtResource("7_ig4nn")]
+position = Vector2(-163, -38)
+slime_vision = Color(0.515625, 1, 0.716187, 1)
+
+[node name="Slime3" parent="." instance=ExtResource("7_ig4nn")]
+position = Vector2(-6, -102)
+rotation = -1.5708
+up_direction = Vector2(-1, 0)
+slime_vision = Color(0.515625, 1, 0.716187, 1)
+
+[node name="Slime2" parent="." instance=ExtResource("7_ig4nn")]
+position = Vector2(-47, -106)
+rotation = 3.14159
+up_direction = Vector2(0, 1)
+slime_vision = Color(0.515625, 1, 0.716187, 1)
 
 [node name="Slime" parent="." instance=ExtResource("7_ig4nn")]
 position = Vector2(89, -6)
@@ -234,4 +251,20 @@ o f s i n ."
 [node name="Level 2" parent="." instance=ExtResource("8_4cqgm")]
 position = Vector2(234, 197)
 rotation = 3.14159
+transport_level = 2
 type = Vector2i(2, 0)
+
+[node name="Purple Slime" parent="." instance=ExtResource("9_e28s8")]
+position = Vector2(291, 154)
+
+[node name="Purple Slime2" parent="." instance=ExtResource("9_e28s8")]
+position = Vector2(374, 170)
+
+[node name="Sign" parent="." instance=ExtResource("10_3681g")]
+position = Vector2(-67, -198)
+text = "I AM THE FLOATING SIGN.
+
+WHY THE FUCK ARE YOU HERE?"
+
+[node name="Bottom" type="Node2D" parent="."]
+position = Vector2(157, 325)
